@@ -1,0 +1,64 @@
+{% extends 'cars/base.html' %}
+{% load humanize %}
+{% block title %}Results - Car Finder{% endblock %}
+
+{% block content %}
+<section class="results-header">
+    <div class="container">
+        <h1>Your Personalized Recommendations</h1>
+        <div class="search-criteria">
+            <span class="criteria-badge">Budget: ${{ budget|floatformat:0|intcomma }}</span>
+            <span class="criteria-badge">Purpose: {{ purpose|title }}</span>
+            <span class="criteria-badge">Type: {{ car_type|title }}</span>
+        </div>
+    </div>
+</section>
+
+<section class="results-section">
+    <div class="container">
+        {% if cars %}
+            <p class="results-count">We found <strong>{{ cars.count }}</strong> car{{ cars.count|pluralize }} matching your criteria</p>
+            
+            <div class="cars-grid">
+                {% for car in cars %}
+                <div class="car-card">
+                    <div class="car-image">
+                        <img src="{{ car.image_Url }}" alt="{{ car.brand }} {{ car.name }}" loading="lazy">
+                        <div class="car-price-badge">${{ car.price|floatformat:0|intcomma }}</div>
+                    </div>
+                    <div class="car-content">
+                        <h3 class="car-title">{{ car.brand }} {{ car.name }}</h3>
+                        <p class="car-description">{{ car.description|truncatewords:20 }}</p>
+                        
+                        <div class="car-tags">
+                            <span class="tag">{{ car.get_car_type_display }}</span>
+                            <span class="tag">{{ car.get_purpose_display }}</span>
+                        </div>
+                        
+                        <div class="car-features">
+                            <strong>Key Features:</strong>
+                            <p>{{ car.features|truncatewords:10 }}</p>
+                        </div>
+                        
+                        <a href="{% url 'car_detail' car.id %}" class="view-details-btn">View Details →</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-results">
+                <div class="no-results-icon">😔</div>
+                <h2>No Cars Found</h2>
+                <p>We couldn't find any cars matching your exact criteria.</p>
+                <p>Try adjusting your preferences:</p>
+                <a href="{% url 'recommend' %}" class="cta-button">Search Again</a>
+            </div>
+        {% endif %}
+        
+        <div class="action-buttons">
+            <a href="{% url 'recommend' %}" class="secondary-button">← Refine Search</a>
+            <a href="{% url 'home' %}" class="secondary-button">Back to Home</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

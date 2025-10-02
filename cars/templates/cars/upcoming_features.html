@@ -1,0 +1,156 @@
+{% extends 'cars/base.html' %}
+
+{% block title %}Upcoming Features - CarFinder{% endblock %}
+
+{% block content %}
+<section class="features-hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>🔮 Our Roadmap</h1>
+            <p class="hero-subtitle">Building the future of car recommendations</p>
+            <div class="hero-description">
+                <p>Discover what's next for CarFinder as we continue to innovate and improve your car search experience.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="roadmap-section">
+    <div class="container">
+        <div class="roadmap-intro">
+            <h2>Our Development Journey</h2>
+            <p>We're constantly working to enhance CarFinder with new features and improvements. Here's what we've built and what's coming next.</p>
+        </div>
+        
+        <!-- Already Available -->
+        <div class="roadmap-category">
+            <div class="category-header available">
+                <div class="header-content">
+                    <span class="category-icon">✅</span>
+                    <div class="header-text">
+                        <h2>Already Available</h2>
+                        <p>Features you can use right now</p>
+                    </div>
+                </div>
+                <div class="status-badge">Live</div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Smart Recommendation Engine</h3>
+                    <p>Filter cars by budget, purpose, and type to find your perfect match</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Interactive Multi-Step Form</h3>
+                    <p>User-friendly questionnaire with smooth transitions and progress tracking</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚗</div>
+                    <h3>Detailed Car Profiles</h3>
+                    <p>View high-quality images, features, specs, and pricing for each vehicle</p>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Coming Soon -->
+        <div class="roadmap-category">
+            <div class="category-header coming-soon">
+                <div class="header-content">
+                    <span class="category-icon">🚀</span>
+                    <div class="header-text">
+                        <h2>Coming Soon</h2>
+                        <p>Features currently in development</p>
+                    </div>
+                </div>
+                <div class="status-badge">In Progress</div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Machine Learning Recommendations</h3>
+                    <p>Advanced recommendation system that learns from user preferences and browsing patterns</p>
+                    <div class="tech-tags">
+                        <span class="tech-badge">TensorFlow</span>
+                        <span class="tech-badge">Scikit-learn</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚖️</div>
+                    <h3>Car Comparison Tool</h3>
+                    <p>Side-by-side comparison of multiple cars with detailed specs, pricing, and features</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>User Reviews & Ratings</h3>
+                    <p>Community-driven reviews and ratings to help make informed decisions</p>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Future Plans -->
+        <div class="roadmap-category">
+            <div class="category-header future">
+                <div class="header-content">
+                    <span class="category-icon">🔮</span>
+                    <div class="header-text">
+                        <h2>Future Plans</h2>
+                        <p>Features in our long-term vision</p>
+                    </div>
+                </div>
+                <div class="status-badge">Planned</div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Social Sharing</h3>
+                    <p>Share your favorite cars and recommendations with friends and family</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Market Trend Analysis</h3>
+                    <p>View pricing trends, popularity charts, and market insights</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>User Accounts & Wishlists</h3>
+                    <p>Save favorite cars, track your search history, and personalized dashboards</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Implementation Note -->
+        <div class="tech-note">
+            <div class="note-header">
+                <span class="note-icon">💡</span>
+                <h3>How We'll Scale the Car Database</h3>
+            </div>
+            <div class="tech-explanation">
+                <div class="tech-method">
+                    <h4>1. Web Scraping Pipeline</h4>
+                    <p>Automated scripts to scrape car data from manufacturer websites, automotive review sites, and pricing databases.</p>
+                    <div class="code-block">
+                        <code>Technologies: BeautifulSoup, Scrapy, Selenium</code>
+                    </div>
+                </div>
+                <div class="tech-method">
+                    <h4>2. Third-Party APIs</h4>
+                    <p>Integration with automotive data providers for real-time specifications, pricing, and availability.</p>
+                    <div class="code-block">
+                        <code>APIs: Edmunds API, NHTSA Vehicle API, Kelley Blue Book</code>
+                    </div>
+                </div>
+                <div class="tech-method">
+                    <h4>3. Crowdsourced Data</h4>
+                    <p>Allow verified dealers and users to contribute car listings with admin approval.</p>
+                    <div class="code-block">
+                        <code>Moderation: Django Admin, User Verification System</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

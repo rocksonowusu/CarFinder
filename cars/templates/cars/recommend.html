@@ -1,0 +1,162 @@
+{% extends 'cars/base.html' %}
+
+{% block title %} Find Your Car - CarFinder {% endblock %}
+
+{% block content %}
+<section class="recommend-section">
+    <div class="container">
+        <h1>Let's Find Your Perfect Car</h1>
+        <p class="subtitle">Answer a few questions to get personalized recommendations</p>
+        <button id="startButton" class="cta-button">Start Finding My Car</button>
+    </div>
+</section>
+
+<!-- Modal -->
+ <div id="recommendModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+            <p class="progress-text">Question <span id="currentStep">1</span> of 3</p>
+        </div>
+        <!-- Form -->
+        <form action="{% url 'results' %}" method="POST" id="recommendForm">
+            {% csrf_token %}
+            <!-- Step 1: Budget -->
+            <div class="form-step active" data-step="1">
+                <h2>What's your budget</h2>
+                <p class="step-description">Select your maximum budget range</p>
+                <div class="input-group">
+                    <label class="radio-card">
+                        <input type="radio" name="budget" value="25000" required>
+                        <span class="radio-content">
+                            <span class="radio-icon">💵</span>
+                            <span class="radio-label">Under $25,000</span>
+                        </span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="budget" value="35000" required>
+                        <span class="radio-content">
+                            <span class="radio-icon">💰</span>
+                            <span class="radio-label">$25,000 - $35,000</span>
+                        </span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="budget" value="50000" required>
+                        <span class="radio-content">
+                            <span class="radio-icon">💎</span>
+                            <span class="radio-label">$35,000 - $50,000</span>
+                        </span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="budget" value="100000" required>
+                        <span class="radio-content">
+                            <span class="radio-icon">👑</span>
+                            <span class="radio-label">$50,000 - $100,000</span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Step 2: Purpose -->
+            <div class="form-step" data-step="2">
+                <h2>What's your main purpose?</h2>
+                <p class="step-description">How will you primarily use the car?</p>
+                <div class="input-group">
+                    <label class="radio-card">
+                        <input type="radio" name="purpose" value="daily" required>
+                        <span class="radio-content">
+                            <span class="radio-icon">🏨</span>
+                            <span class="radio-label">Daily Commute</span>
+                        </span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="purpose" value="family" required>
+                        <span class="radio-content">
+                            <span class="radio-icon">👨‍👩‍👧‍👦</span>
+                            <span class="radio-label">Family Use</span>
+                        </span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="purpose" value="luxury" required>
+                        <span class="radio-content">
+                            <span class="radio-icon">✨</span>
+                            <span class="radio-label">Luxury</span>
+                        </span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="purpose" value="offroad" required>
+                        <span class="radio-content">
+                            <span class="radio-icon">⛰</span>
+                            <span class="radio-label">Off-Road / Adventure</span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Step 3: Car Type -->
+            <div class="form-step" data-step="3">
+                <h2>What type of car do you prefer?</h2>
+                <p class="step-description">Choose your preferred body style</p>
+                <div class="input-group">
+                    <label class="radio-card">
+                        <input type="radio" name="car_type" value="sedan" required>
+                        <span class="radio-content">
+                            <span class="radio-icon">🚗</span>
+                            <span class="radio-label">Sedan</span>
+                        </span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="car_type" value="suv">
+                        <span class="radio-content">
+                            <span class="radio-icon">🚙</span>
+                            <span class="radio-label">SUV</span>
+                        </span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="car_type" value="hatchback">
+                        <span class="radio-content">
+                            <span class="radio-icon">🚘</span>
+                            <span class="radio-label">Hatchback</span>
+                        </span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="car_type" value="truck">
+                        <span class="radio-content">
+                            <span class="radio-icon">🛻</span>
+                            <span class="radio-label">Truck</span>
+                        </span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="car_type" value="coupe">
+                        <span class="radio-content">
+                            <span class="radio-icon">🏁</span>
+                            <span class="radio-label">Coupe</span>
+                        </span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="car_type" value="convertible">
+                        <span class="radio-content">
+                            <span class="radio-icon">🌞</span>
+                            <span class="radio-label">Convertible</span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="form-navigation">
+                <button type="button" id="prevButton" class="nav-button secondary" style="display: none;">Previous</button>
+                <button type="button" id="nextButton" class="nav-button primary" style="display: none;">Next →</button>
+                <button type="submit" id="submitButton" class="nav-button primary" style="display: none;">Find My Cars 🚗</button>
+            </div>
+        </form>
+    </div>
+ </div>
+ {% load static %}
+ <script src="{% static 'cars/js/recommend.js' %}"></script>
+{% endblock %}

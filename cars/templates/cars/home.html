@@ -1,0 +1,38 @@
+{% extends "cars/base.html" %}
+
+{% block title %}Home - Car Finder{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-overlay">
+        <div class="hero-content">
+            <h1>Find Your Perfect Car</h1>
+            <p>Answer a few simple questions and discover the car that matches your needs and budget.</p>
+            <a href="{% url 'recommend' %}" class="cta-button">Find Your Car Now</a>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <h2>Why Choose CarFinder?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <span class="feature-icon">💰</span>
+                <h3>Budget-Friendly</h3>
+                <p>Find cars that fit your budget perfectly</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🎯</span>
+                <h3>Purpose-Driven</h3>
+                <p>Match cars to your lifestyle needs</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">⚡</span>
+                <h3>Quick Result</h3>
+                <p>Get personalized recommendations instantly</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

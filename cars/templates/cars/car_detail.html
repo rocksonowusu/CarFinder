@@ -1,0 +1,121 @@
+{% extends "cars/base.html" %}
+{% load humanize %}
+{% load car_extras %}
+
+{% block title %} {{ car.brand }} {{ car.name }} -  CarFinder {% endblock %}
+
+{% block content %}
+<section class="detail-hero">
+    <div class="container">
+        <a href="javascript:history.back()" class="back-button">⬅ Back to Results</a>
+        <div class="detail-grid">
+            <div class="detail-image">
+                <img src="{{ car.image_Url }}" alt="{{ car.brand }} {{ car.name }}" onerror="this.src='https://via.placeholder.com/800x600/667eea/ffffff?text={{ car.brand }}+{{ car.name }}'">
+                <div class="image-overlay">
+                    <span class="price-tag">${{ car.price|floatformat:0|intcomma }}</span>
+                </div>
+            </div>
+            <div class="detail-info">
+                <div class="car-badge"> {{ car.get_car_type_display }}</div>
+                <h1 class="detail-title">{{ car.brand }} {{ car.name }}</h1>
+                <p class="detail-subtitle">{{ car.get_purpose_display }} Vehicle</p>
+
+                <div class="quick-specs">
+                    <div class="spec-item">
+                        <span class="spec-icon">💰</span>
+                        <div>
+                            <p class="spec-label">Price</p>
+                            <p class="spec-value">${{ car.price|floatformat:0|intcomma }}</p>
+                        </div>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-icon">🚗</span>
+                        <div>
+                            <p class="spec-label">Type</p>
+                            <p class="spec-value">{{ car.get_car_type_display }}</p>
+                        </div>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-icon">🎯</span>
+                        <div>
+                            <p class="spec-label">Purpose</p>
+                            <p class="spec-value">{{ car.get_purpose_display }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="detail-content">
+    <div class="container">
+        <div class="content-grid">
+            <!-- Description -->
+             <div class="detail-section">
+                <h2 class="section-title">
+                    <span class="title-icon">📝</span>
+                    Description
+                </h2>
+                <p class="description-text">{{ car.description }}</p>
+             </div>
+
+             <!-- Features -->
+              <div class="detail-section">
+                <h2 class="section-title">
+                    <span class="title-icon">⭐</span>
+                    Key Features
+                </h2>
+                <ul class="features-list">
+                    {% for feature in car.features|split:',' %}
+                    <li class="feature-item">
+                        <span class="checkmark">✔</span>
+                        {{ feature|trim }}
+                    </li>
+                    {% endfor %}
+                </ul>
+              </div>
+
+              <!-- Specification Card -->
+               <div class="detail-section specs-card">
+                    <h2 class="section-title">
+                        <span class="title-icon">🔧</span>
+                        Specifications
+                    </h2>
+                    <div class="specs-grid">
+                        <div class="spec-row">
+                            <span class="spec-key">Brand</span>
+                            <span class="spec-value-detail">{{ car.brand }}</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-key">Model</span>
+                            <span class="spec-value-detail">{{ car.name }}</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-key">Body Type</span>
+                            <span class="spec-value-detail">{{ car.get_car_type_display }}</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-key">Best For</span>
+                            <span class="spec-value-detail">{{ car.get_purpose_display }}</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-key">Starting Price</span>
+                            <span class="spec-value-detail">{{ car.price|floatformat:0|intcomma }}</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-key">Added On</span>
+                            <span class="spec-value-detail">{{ car.created_at|date:"M d, Y" }}</span>
+                        </div>
+                    </div>
+               </div>
+        </div>
+        <!-- Action Buttons -->
+        <div class="detail-actions">
+            <a href="javascript:history.back()" class="action-btn secondary">⬅ Back to Results</a>
+            <a href="{% url 'recommend' %}" class="action-btn primary">⬅ Find Another Car</a>
+            <a href="{% url 'home' %}" class="action-btn secondary">Back to Home</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
